@@ -1,0 +1,120 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>新增标签页</title>
+    <script th:src="@{/js/category/addCategory.js}" ></script>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform" >
+            <form class="form-horizontal form-search" name="searchForm" role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">唯一编号：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="code" id="code" maxlength="20"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">名称：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="name" id="name" maxlength="100"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">顺序(从小到大)：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="seq" maxlength="20"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label class="col-sm-4 control-label">请添加爬取地址：</label><br/><br/>
+                            <div id="addUrl">
+                                <div class="form-group" id="addSourceSite">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" name="origin">
+                                            <option value="-1">请选择网站来源</option>
+                                            <option th:each="sourceSite:${sourceSites}"
+                                                    th:value="${sourceSite.code}"
+                                                    th:text="${sourceSite.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" name="mappings" placeholder="请选输入网址">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" onclick="appendText()" class="btn btn-info" ><i class="ion-ios-plus-empty"></i></button>
+                        </div>
+                    </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-lg-6 col-md-6">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-4 control-label">简称：</label>-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<input class="form-control" type="text" name="shortname" maxlength="20"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<div class="row">-->
+                    <!--<div class="col-lg-6 col-md-6">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-4 control-label">父类编码：</label>-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<input class="form-control" type="text" name="parentCode" maxlength="20"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row">-->
+                    <!--<div class="col-lg-6 col-md-6">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-4 control-label">编码链，从父到己, 用/分隔：</label>-->
+                            <!--<div class="col-sm-4">-->
+                                <!--<input class="form-control" type="text" name="codeChain" maxlength="20"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" onclick="submitCategory(this)">&nbsp;提交&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+</body>
+</html>

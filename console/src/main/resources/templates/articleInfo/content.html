@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="" href="" type="image/x-icon" />
+    <style>
+        #main {
+            width: 375px;
+            height: 667px;
+            margin: 0 auto;
+            font-size: 14px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        #main img {
+            width: 100%;
+            padding-top: 8px;
+        }
+
+        iframe {
+            width: 100%;
+            display: block;
+            margin-top: 8px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <pre id="main"></pre>
+    <script th:inline="javascript">
+        var json =[[${content}]];
+    </script>
+    <script>
+        if(json == null){
+            json = '没有内容';//'还记得技能等级对你的<card src="https://www.baidu.com?aaa=1111&aaa=222"/>好吧宝贝回家<img src="/storage/emulated/0/XRichText/1563517161054-"/><card src="https://www.baidu.com"/><img src="http://pics.sc.chinaz.com/files/pic/pic9/201903/zzpic16838.jpg"/><img src="http://pics.sc.chinaz.com/files/pic/pic9/201903/zzpic16838.jpg"/><img src="http://pics.sc.chinaz.com/files/pic/pic9/201903/zzpic16838.jpg"/>';
+        }
+
+        var imgReg = /<card.*?(?:>|\/>)/gi;
+        var srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+        var src_array = [];
+        var arr = json.match(imgReg);
+        if(arr != null){
+            for (var g = 0; g < arr.length; g++) {
+                src_array.push(arr[g].match(srcReg))
+            }
+        }
+        var iframe_json = json.replace(/<card[^<>]+>/g,'<iframe src=""></iframe>');
+        document.getElementById('main').innerHTML = iframe_json;
+        var iframe = document.getElementsByTagName('iframe');
+        for (var i = 0; i < iframe.length; i++) {
+            iframe[i].src = src_array[i][1];
+        }
+    </script>
+</body>
+
+</html>

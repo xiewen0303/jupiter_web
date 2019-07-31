@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/article/stylesheets/style.css}" type="text/css" />
+    <script th:src="@{/js/article/jquery-3.1.1.js}"></script>
+</head>
+
+<body>
+
+   <!-- 隐藏域-->
+   <i class="hidden-content-origin" th:text="${goods_card_info.origin}" hidden></i>
+    <div class="container">
+        <div class="content">
+            <ul class="content-det-filter-list">
+              <li>
+                <a :href="item.detail_url">
+                  <span class="content-det-filter-img"><img th:src="@{${goods_card_info.icon}}" alt=""></span>
+                  <span class="content-det-filter-content">
+                    <h4 th:text="${goods_card_info.title}"></h4>
+                    <h5 class = 'price-show' th:text="${goods_card_info.price_unit}+' '+${goods_card_info.price}"></h5>
+                    <s class = 'price-show' th:text="${goods_card_info.price_unit}+' '+${goods_card_info.origin_price}"></s>
+                    <span class="content-det-filter-mark">
+                      <span class="content-det-filter-star">
+                      </span>
+                      <span class="content-score" th:text="${goods_card_info.score}" ></span>
+                      <img class = "content-origin" alt="">
+                    </span>
+                  </span>
+                  <span class="content-det-filter-discounts"><em class= "discount-show" th:text="${goods_card_info.discount}"></em></span>
+                </a>
+              </li>
+          </ul>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function(){
+            // 格式化折扣
+            var discount_show = $('.discount-show');
+            console.log(discount_show);
+            discount_show.text(parseInt(discount_show.text())+"%");
+
+            // 更新商户图片
+             var origin = $('.hidden-content-origin');
+             console.log(origin.text())
+             var originTrim = origin.text().trim().toLowerCase();
+             $('.content-origin').attr('src','/img/article/'+originTrim+".png");
+
+            // 更新star样式
+            var star = $('.content-det-filter-star');
+            var star_data = Number($('.content-score').text().trim());
+
+            if(star_data === 0) {
+                star.addClass('star-00');
+            }
+            if(star_data > 0 && star_data <= 0.5) {
+                star.addClass('star-00-half');
+            }
+            if(star_data === 1) {
+                star.addClass('star-01');
+            }
+            if(star_data > 1 && star_data <= 1.5) {
+                star.addClass('star-01-half');
+            }
+            if(star_data === 2) {
+                star.addClass('star-02');
+            }
+            if(star_data > 2 && star_data <= 2.5) {
+                star.addClass('star-02-half');
+            }
+            if(star_data === 3) {
+                star.addClass('star-03');
+            }
+            if(star_data > 3 && star_data <= 3.5) {
+                star.addClass('star-03-half');
+            }
+            if(star_data === 4) {
+                star.addClass('star-04');
+            }
+            if(star_data > 4 && star_data <= 4.5) {
+                star.addClass('star-04-half');
+            }
+            if(star_data === 5) {
+                star.addClass('star-05');
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

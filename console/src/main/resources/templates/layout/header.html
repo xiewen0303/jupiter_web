@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+</head>
+<body>
+<header class="main-header" th:fragment="header">
+    <!--<a href="/" class="logo">-->
+        <!--<span class="logo-lg"><img th:src="@{/img/logo-page.png}"  alt="logo" /><i><img th:src="@{/img/slogen.png}"  alt="运营支撑平台" /></i></span>-->
+    <!--</a>-->
+    <a href="/" class="logo">
+        <span class="logo-lg"><i><img th:src="@{/img/slogen.png}"  alt="运营支撑平台" /></i></span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Logo -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown user-menu">
+                    <a th:href="@{/admin/initLocalPwdUpdate}" class="menu-color" title='修改密码'>
+                        修改密码
+                    </a>
+                </li>
+                <li class="dropdown user-menu user-headimg">
+                    <a href="#" class="menu-color">
+                        <img th:src="@{/img/avatar.png}" class="user-image hidden-xs " alt="用户头像" />
+                        <span class="user-info">
+                            <shiro:principal property="adminName"/>
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown user-menu user-out">
+                    <a th:href="@{/start/logout}" class="btn-info">
+                        <i class="oicon oicon-power1"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>

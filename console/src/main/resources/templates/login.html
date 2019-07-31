@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <!-- jQuery 2.2.0 -->
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/plugins/terebentina-sco/css/scojs.css}"/>
+    <script th:src="@{/js/jQuery/jQuery-2.2.0.min.js}"></script>
+    <script th:src="@{/js/login.js}" ></script>
+    <script th:src="@{/plugins/terebentina-sco/js/sco.message.js}" ></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-page">
+<div class="login-box loginbox">
+    <div class="h-title">
+        <span class="header-img">
+            <!--<img th:src="@{/img/login/logo.png}" alt="" />-->
+        </span>
+    </div>
+    <div class="login-form">
+        <ul>
+            <li>
+                <div class="formflex"><i class="adminicon-user"></i><input type="text" id="adminName" placeholder="用户名" tabindex="1" maxlength="20"/></div>
+            </li>
+            <li>
+                <div class="formflex"><i class="adminicon-password"></i><input type="password" id="passwd" placeholder="密码" tabindex="2" /></div>
+            </li>
+            <!--<li>-->
+                <!--<div class="formflex"><i class="adminicon-vercode"></i><input type="text" id="vcode" placeholder="图片验证码" tabindex="3" maxlength="4" />-->
+                    <!--<img id="verifyCodeImg" src="/start/validateImage" onclick="changeImage(this);" />-->
+                <!--</div>-->
+            <!--</li>-->
+            <li>
+                <div class="form-message formflex"></div>
+            </li>
+            <li>
+                <a class="btn btn-block" id="loginsubmit" tabindex="4" >登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

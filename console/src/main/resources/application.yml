@@ -1,0 +1,85 @@
+server:
+  port: 8011
+
+logging:
+  level:
+    com.jupiter.web.manager: DEBUG
+spring:
+  jackson:
+      default-property-inclusion: non_null
+  messages:
+    basename: i18n.messages
+  mvc:
+    throw-exception-if-no-handler-found: true
+  thymeleaf:
+      enabled: true
+      cache: false
+  datasource:
+    url: jdbc:mysql://10.0.0.12:3306/jupiter_india?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: jupiter
+    password: jda780319
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 60000
+      connection-test-query: SELECT 1
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-idle: 100
+        min-idle: 1
+        max-active: 1000
+        max-wait: -1
+    timeout: 3000
+  data:
+    mongodb:
+      uri: mongodb://crawler:639sharp@10.0.0.12/cbec_crawler?authMechanism=SCRAM-SHA-1
+
+mybatis:
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    map-underscore-to-camel-case: true
+rsa:
+  server:
+    public_key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC77R7uXoeUbb3wqJFpCBbGxPDHJBS+gKxRyQ3vJB/aBr0vqSC7xZ7YAorHGDZHRRjVbOS7naZeApFN10kV+iRYskYtto3ZdEVI9Elv0kDobwJnGpkM/AJ3v67Bl8u9T35wkqjdDR4K/GBqGUgEyIV0pXfpe/eAIjEUKtNAPWp3JQIDAQAB
+    private_key: MIICWwIBAAKBgQC77R7uXoeUbb3wqJFpCBbGxPDHJBS+gKxRyQ3vJB/aBr0vqSC7xZ7YAorHGDZHRRjVbOS7naZeApFN10kV+iRYskYtto3ZdEVI9Elv0kDobwJnGpkM/AJ3v67Bl8u9T35wkqjdDR4K/GBqGUgEyIV0pXfpe/eAIjEUKtNAPWp3JQIDAQABAoGAO0eMJ0MYX4DSlpSF8ezESoUbMqY2CPXL5ayXQaVSitLvYJZoJfMrrRX4Mt93V7n7IG/OI0SSkzsaHMTZYB5c0janGFZCgT9hsnB0Fl9N1YqOfjY2CLrs3oapRwAxUy/5gBynk0EZphs2atNmKQ9PTVbapjgKB67V4FG/pAKMz40CQQDzAvXGpuhMcVFq4rNSX6FKe/y/cRFoFs+eKIL19Ux+hM2bZ8arfx8OLADckOOfSg/hLUKtpgryvHOpXaXovVRPAkEAxfhywN9Ov/6kWzFUTTR4iOqDNokkkSn9HGmbNDRJ/a7HSL2A6zzUtqi9RcSI87tOGneW9YugJQvy8iw1w3v8SwJAF2EEhi0OkjQgshjHSbh7iu/su/pDw3DWXo/lMYZ86nsaUMYmHd+n/DQNjSq/S1bTukUhchVUXk/1DKk+yepVDwJALw6haEssUuLaenq9SSTByfnEesAamw7aBVjs9XnAZLaY1CeHb2MkRM7TPrQ6wYSySgRHM9KenG+8refoV7EvBQJARsgaJfeD4c9hI9b0d/xQcCgJKSqbMRREEKlnVdHzoqicYetP2q9jLq2Hd1oOXJT/n2+9DvKyG3PWv8nJDW/Wpw==
+    private_key8: MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALvtHu5eh5RtvfCokWkIFsbE8MckFL6ArFHJDe8kH9oGvS+pILvFntgCiscYNkdFGNVs5Ludpl4CkU3XSRX6JFiyRi22jdl0RUj0SW/SQOhvAmcamQz8Ane/rsGXy71PfnCSqN0NHgr8YGoZSATIhXSld+l794AiMRQq00A9anclAgMBAAECgYA7R4wnQxhfgNKWlIXx7MRKhRsypjYI9cvlrJdBpVKK0u9glmgl8yutFfgy33dXufsgb84jRJKTOxocxNlgHlzSNqcYVkKBP2GycHQWX03Vio5+NjYIuuzehqlHADFTL/mAHKeTQRmmGzZq02YpD09NVtqmOAoHrtXgUb+kAozPjQJBAPMC9cam6ExxUWris1JfoUp7/L9xEWgWz54ogvX1TH6EzZtnxqt/Hw4sANyQ459KD+EtQq2mCvK8c6ldpei9VE8CQQDF+HLA306//qRbMVRNNHiI6oM2iSSRKf0caZs0NEn9rsdIvYDrPNS2qL1FxIjzu04ad5b1i6AlC/LyLDXDe/xLAkAXYQSGLQ6SNCCyGMdJuHuK7+y7+kPDcNZej+UxhnzqexpQxiYd36f8NA2NKr9LVtO6RSFyFVReT/UMqT7J6lUPAkAvDqFoSyxS4tp6er1JJMHJ+cR6wBqbDtoFWOz1ecBktpjUJ4dvYyREztM+tDrBhLJKBEcz0p6cb7yt5+hXsS8FAkBGyBol94Phz2Ej1vR3/FBwKAkpKpsxFEQQqWdV0fOiqJxh60/ar2MurYd3Wg5clP+fb70O8rIbc9a/yckNb9an
+  client:
+    public_key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD26YJEdaosihz9qZC5KNMLMjtAOgAes+x+9yMC7CMNj75Z/nW8EEFg2ucELk04X6D7Tf+TvkQeiZXC4zzU8MBD2ovxts+QHq6mbkl69M7PpBBpFIixRb/bjld9vrbAxdB6YnzfTj1LGPVmbwrsF/5narFuvVKeZkg3q2Harj71wIDAQAB
+    private_key: MIICXAIBAAKBgQDD26YJEdaosihz9qZC5KNMLMjtAOgAes+x+9yMC7CMNj75Z/nW8EEFg2ucELk04X6D7Tf+TvkQeiZXC4zzU8MBD2ovxts+QHq6mbkl69M7PpBBpFIixRb/bjld9vrbAxdB6YnzfTj1LGPVmbwrsF/5narFuvVKeZkg3q2Harj71wIDAQABAoGASYFh6v165o0WiY8EDw7oCmq0bd5tM+DjmhTATP8GH1ksgUX4iiZZAMy10jikiagnZzPcU+EnsHtncDuxhpDlGhOJ9TXtB7nSb+ij2qG1taUxuo3DSdv5JjGY4mMTp6HxisfLlNW6uFHqJaV3kfWW6gtN10NJJqiceP0Ddl98weECQQD7piPw2+GfbWeD3N5xbdMRbZ7+4tANPklg8VDcpr5fWGNJnw1sstnYyDrmlmmDJemvWsAjmNjQ8bbMo7z0LQCtAkEAxz6QUAqgi0wWujqrFs6T/EPRvPrWqP5zE+kg66MPojFk1blkCB5gzhuBOXvcb1SgtOb0oo5XaWw8zNcBWJSLEwJATxKwfnGJHuBww3V2jCvXQ8WvTSYV++NTiVuqbfsTHMCYSjzpKfu1CjI4l9Yxh101Zb1dXJIdpuIc74aPzCYL7QJBAJRM0QWCo3SLMe9zc50KLcP6hsZuvhATNHyBbWt2d1B2C2O5FeelFNDUUB8FPlHvX57GuRe1cwKY+bhN4EaaadkCQDn2LsfV6a+u8FaEpZw81kSJa4TUALFgNzJx5ZdSQuUlUW1rmodib3bfD+t+XLO6MSx59IMMaJtsW1Cw0NamA/E=
+    private_key8: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMPbpgkR1qiyKHP2pkLko0wsyO0A6AB6z7H73IwLsIw2Pvln+dbwQQWDa5wQuTThfoPtN/5O+RB6JlcLjPNTwwEPai/G2z5AerqZuSXr0zs+kEGkUiLFFv9uOV32+tsDF0HpifN9OPUsY9WZvCuwX/mdqsW69Up5mSDerYdquPvXAgMBAAECgYBJgWHq/XrmjRaJjwQPDugKarRt3m0z4OOaFMBM/wYfWSyBRfiKJlkAzLXSOKSJqCdnM9xT4Sewe2dwO7GGkOUaE4n1Ne0HudJv6KPaobW1pTG6jcNJ2/kmMZjiYxOnofGKx8uU1bq4UeolpXeR9ZbqC03XQ0kmqJx4/QN2X3zB4QJBAPumI/Db4Z9tZ4Pc3nFt0xFtnv7i0A0+SWDxUNymvl9YY0mfDWyy2djIOuaWaYMl6a9awCOY2NDxtsyjvPQtAK0CQQDHPpBQCqCLTBa6OqsWzpP8Q9G8+tao/nMT6SDrow+iMWTVuWQIHmDOG4E5e9xvVKC05vSijldpbDzM1wFYlIsTAkBPErB+cYke4HDDdXaMK9dDxa9NJhX741OJW6pt+xMcwJhKPOkp+7UKMjiX1jGHXTVlvV1ckh2m4hzvho/MJgvtAkEAlEzRBYKjdIsx73NznQotw/qGxm6+EBM0fIFta3Z3UHYLY7kV56UU0NRQHwU+Ue9fnsa5F7VzApj5uE3gRppp2QJAOfYux9Xpr67wVoSlnDzWRIlrhNQAsWA3MnHll1JC5SVRbWuah2Jvdt8P635cs7oxLHn0gwxom2xbULDQ1qYD8Q==
+
+
+oss:
+  aliyun:
+    endpoint: oss-ap-southeast-5.aliyuncs.com
+# 原账号
+#    accessKeyId: LTAIHUfnj2HMEfHR
+#    accessKeySecret: gziCE9W0TXXC8GbtBLWSLmnRPHiHws
+# RAM账号
+    accessKeyId: LTAI8rNUKGAFLiZf
+    accessKeySecret: Coaw5Hsjfr4gUgUgDcJVuGi2DCx7Yd
+
+
+app-config:
+  session_url:
+     jupiterapibannerget_banner: false  # 路径去掉/
+     jupiterapipagesave_click_record: false
+     jupiterapigoodssearch_sku: false
+  session_valid_time: 10080
+  captcha_valid_time: 300
+  skyline_valicode_api_account: cs_tk5xr6
+  skyline_valicode_api_pwd: RvaCpr9W
+  skyline_other_api_account: cs_4y8kuy
+  skyline_other_api_pwd: 9k7XyPY5
+  allow_origin: .*\.cocokvip\.com$

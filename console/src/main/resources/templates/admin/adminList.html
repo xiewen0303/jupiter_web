@@ -1,0 +1,229 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>管理员列表</title>
+    <script th:src="@{/js/admin/adminList.js}" ></script>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform" >
+            <form class="form-horizontal form-search"  role="form">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">管理员名称：</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" name="adminName" maxlength="20"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">管理员状态：</label>
+                            <div class="col-sm-8">
+                                <select id="forbid" name="forbid" class="form-control">
+                                    <option th:each="statusMap, typeMapStat:${typeMap}"
+                                            th:value="${statusMap.key}"
+                                            th:text="${statusMap.value}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" onclick="searchList(this)">&nbsp;查询&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                        <button type="button" onclick="initAddAdmin()" shiro:hasPermission="/admin/initAddAdmin" class="btn btn-primary"><i class="ion-ios-plus-empty"></i>添加</button>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-bordered table-hover" style="table-layout:fixed">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>管理员ID</th>
+                                <th>管理员名</th>
+                                <th>状态</th>
+                                <th>角色</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td>
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.id}}</td>
+                                    <td>{{tab.adminName}}</td>
+                                    {{if tab.forbid}}
+                                    <td>禁用</td>
+                                    {{else}}
+                                    <td>正常</td>
+                                    {{/if}}
+                                    <td>{{tab.roleName}}</td>
+                                    <td>
+                                        <div class='icon-flex'>
+                                            <a href='javascript:void(0);' title='编辑' shiro:hasPermission="/admin/update" onclick='initEditAdminInfo({{tab.id}})'><i class='oicon oicon-edit'></i></a>
+                                            <a href='javascript:void(0);' title='修改密码' shiro:hasPermission="/admin/updatePwd" onclick='initUpdatePwd({{tab.id}})'><i class='oicon oicon-key'></i></a>
+                                            {{if tab.forbid}}
+                                            <a href='javascript:void(0);' title='启用' shiro:hasPermission="/admin/enableAdmin" onclick='enableAdmin({{tab.id}})'><i class='oicon oicon-accountm'></i></a>
+                                            {{else}}
+                                            <a href='javascript:void(0);' title='禁用' shiro:hasPermission="/admin/forbidAdmin" onclick='forbidAdmin({{tab.id}})'><i class='oicon oicon-stop'></i></a>
+                                            {{/if}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <p id="adminListPagination"  class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="adminModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="form-modal" >
+                <script id="tpl-form" type="text/html">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        {{if add}}
+                        <h4 class="modal-title" >添加</h4>
+                        {{else}}
+                        <h4 class="modal-title" >修改</h4>
+                        {{/if}}
+                    </div>
+                    <div class="modal-body">
+                        <form id="adminForm" class="form-horizontal" role="form" novalidate="novalidate" name="adminForm">
+                            {{if !edit}}
+                            <div class="box-body">
+                                <input type="hidden" id="adminId" name="id"  value="{{id}}"/>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">管理员名称<i style="color: red">*</i></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="adminName" value="{{adminName}}" check-type="required" required-message="请填写管理员名称" class="form-control" placeholder="管理员名" autocomplete="off"/>
+                                    </div>
+                                </div>
+                                {{if add}}
+                                <div class="form-group" id="passwdLab">
+                                    <label class="col-sm-3 control-label">密码<i style="color: red">*</i></label>
+                                    <div class="col-sm-9">
+                                        <input type="password" id="password" name="password" check-type="required" minlength="6" maxlength="20" required-message="请填写密码" class="form-control" placeholder="密码" autocomplete="off"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="passwdLab2">
+                                    <label class="col-sm-3 control-label">确认密码<i style="color: red">*</i></label>
+                                    <div class="col-sm-9">
+                                        <input type="password" id="repasswd" name="repasswd" check-type="required" minlength="6" maxlength="20" required-message="请填写确认密码" class="form-control" placeholder="确认密码" autocomplete="off" />
+                                    </div>
+                                </div>
+                                {{/if}}
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">管理员角色<i style="color: red">*</i></label>
+                                    <div class="col-sm-9">
+                                        <select id="roleId" name="roleId" style="width: 100%" class="form-control" value="{{roleId}}" check-type="required" required-message="请选择角色">
+                                            <option value="">请选择</option>
+                                            <option th:each="role:${roleList}"
+                                                    th:value="${role.id}"
+                                                    th:text="${role.roleName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            {{else}}
+                            <input type="hidden" id="passwdId" name="id"  value=""/>
+                            <div class="form-group" id="passwdUpdate">
+                                <label class="col-sm-3 control-label">密码<i style="color: red">*</i></label>
+                                <div class="col-sm-9">
+                                    <input type="password" id="passwordReset" name="password" check-type="required" minlength="6" maxlength="20" required-message="请填写密码" class="form-control" placeholder="密码" autocomplete="clear"/>
+                                </div>
+                            </div>
+                            <div class="form-group" id="passwdUpdate2">
+                                <label class="col-sm-3 control-label">确认密码<i style="color: red">*</i></label>
+                                <div class="col-sm-9">
+                                    <input type="password" id="repasswdReset" name="repasswd" check-type="required" minlength="6" maxlength="20" required-message="请填写确认密码" class="form-control" placeholder="确认密码" autocomplete="clear" />
+                                </div>
+                            </div>
+                            {{/if}}
+                            <div class="box-footer text-right">
+                                <button  type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                {{if add}}
+                                <button id="addAdmin" type="button" class="btn btn-info">添加</button>
+                                {{else if edit}}
+                                <button id="updatePasswd" type="button" class="btn btn-info">修改密码</button>
+                                {{else}}
+                                <button id="updateAdmin" type="button" class="btn btn-info">修改</button>
+                                {{/if}}
+                            </div>
+                        </form>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="googleModel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" id="google-form-modal">
+                <script id="google-tpl-form" type="text/html">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="googleModelLabel">谷歌认证参数</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="googleForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">管理员名称<i style="color: red">*</i></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="adminName" value="{{adminName}}" class="form-control" autocomplete="off" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">秘钥<i style="color: red">*</i></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="googleAuthenticator" value="{{googleAuthenticator}}" class="form-control" autocomplete="off" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">设备名称<i style="color: red">*</i></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="adminName" value="{{adminName}}@{{platformName}}" class="form-control"autocomplete="off" readonly/>
+                                </div>
+                            </div>
+                            <div class="box-footer text-right">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </form>
+                    </div>
+                </script>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+@charset "utf-8";
+
+@import "base/css3-mixins";
+
+.content-det-filter-list {
+	overflow: hidden;
+	>li {
+		height: rem(200);
+		background-color: #fff;
+		// margin-bottom: rem(20);
+		position: relative;
+		padding: rem(36) rem(36) rem(36) rem(30);
+		>a {
+			@include webkit-flex();
+			>span {
+				display: block;
+				&.content-det-filter-img {
+					width: rem(200);
+					height: rem(200);
+					@include border-radius(rem(4));
+					overflow: hidden;
+					position: absolute;
+					top: rem(36);
+					left: rem(30);
+					text-align: center;
+					@include webkit-flex();
+					@include justify-content(center);
+					@include align-items(center);
+					>img {
+						max-height: 100%;
+					}
+				}
+				&.content-det-filter-content {
+					width: 100%;
+					margin-left: rem(220);
+					>h4 {
+						height: rem(74);
+						overflow: hidden;
+						font-size: rem(30);
+						display: block;
+						color: #131C33;
+					}
+					>h5 {
+						font-size: rem(32);
+						display: block;
+						color: #FF451E;
+						padding-top: rem(8);
+					}
+					>s {
+						font-size: rem(24);
+						color: #CACED6;
+						display: block;
+						padding-top: rem(8);
+					}
+					>span.content-det-filter-mark {
+						height: rem(30);
+						padding-top: rem(14);
+						display: block;
+						>span {
+							line-height: rem(30);
+							display: inline-block;
+							font-size: rem(24);
+							color: #414961;
+							vertical-align: top;
+							&.content-det-filter-star {
+								width: rem(140);
+								height: rem(30);
+								margin: 0 rem(14) 0 0;
+								&.star-00 {
+									background: url(../../../img/article/star/0.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-00-half {
+									background: url(../../../img/article/star/1.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-01 {
+									background: url(../../../img/article/star/2.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-01-half {
+									background: url(../../../img/article/star/3.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-02 {
+									background: url(../../../img/article/star/4.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-02-half {
+									background: url(../../../img/article/star/5.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-03 {
+									background: url(../../../img/article/star/6.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-03-half {
+									background: url(../../../img/article/star/7.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-04 {
+									background: url(../../../img/article/star/8.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-04-half {
+									background: url(../../../img/article/star/9.png) no-repeat;
+									background-size: contain;
+								}
+								&.star-05 {
+									background: url(../../../img/article/star/10.png) no-repeat;
+									background-size: contain;
+								}
+							}
+						}
+						>img {
+							float: right;
+							height: rem(30);
+						}
+					}
+				}
+			}
+			>span.content-det-filter-discounts {
+				width: rem(104);
+				height: rem(114);
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: url(../../../img/article/icon/filter-discounts.png) no-repeat;
+				background-size: contain;
+				display: block;
+				>em {
+					font-size: rem(26);
+					color: #fff;
+					font-weight: bold;
+					display: block;
+					padding: rem(8) 0 0 rem(10);
+				}
+			}
+		}
+	}
+}
+
+
+

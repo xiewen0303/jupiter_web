@@ -1,0 +1,138 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>新增文章</title>
+    <link rel="stylesheet"  th:href="@{/css/bootstrap/file/fileinput.css}"/>
+    <script th:src="@{/css/bootstrap/file/fileinput.js}" ></script>
+    <script th:src="@{/css/bootstrap/file/zh.js}" ></script>
+    <script th:src="@{/js/jQuery/jquery-form.js}" ></script>
+    <script th:src="@{/js/articleInfo/modifyArticle.js}" ></script>
+
+    <!--<script th:src="@{/ueditor/ueditor.config.js}" ></script>-->
+    <!--&lt;!&ndash; TODO 测试结束后换成min  <script th:src="@{/ueditor/ueditor.all.min.js}" ></script>&ndash;&gt;-->
+    <!--<script th:src="@{/ueditor/ueditor.all.js}" ></script>-->
+    <!--<script th:src="@{/ueditor/lang/zh-cn/zh-cn.js}" ></script>-->
+
+    <!--<script type="text/javascript">-->
+        <!--//实例化编辑器-->
+        <!--//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例-->
+<!--//        var ue = UE.getEditor('editor');-->
+    <!--</script>-->
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform" >
+            <form class="form-horizontal form-search"  enctype="multipart/form-data" method="post"  action="/banner/submitBanner"  role="form">
+
+            <div id="left" style="width: 45%;float: left;">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题：</label>
+                            <div class="col-sm-8">
+                                <input  type="hidden" name="id" id="articleId" th:value="${articleInfo.id}" />
+                                <input class="form-control" type="text" name="title" th:value="${articleInfo.title}" minlength="1" maxlength="200" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="content">
+                    <iframe  th:src="'content?id='+${articleInfo.contentRefId}" height="700px" width="400px" name="demo" scrolling="auto" sandbox="allow-scripts allow-popups"></iframe>
+                </div>
+            </div>
+            <div id="right"  style="width: 55%;float: left;">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择分类：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="categoryId" id="categoryId" style="width:100%;">
+                                    <option th:each="category:${categorys}" th:selected="${articleInfo.categoryId}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" th:if="${articleInfo.isOffer} eq 1">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="order">
+                                    <option value="">请选择排序</option>
+                                    <option value="1" th:selected="${articleInfo.order eq 1}" >1</option>
+                                    <option value="2" th:selected="${articleInfo.order eq 2}">2</option>
+                                    <option value="3" th:selected="${articleInfo.order eq 3}">3</option>
+                                    <option value="4" th:selected="${articleInfo.order eq 4}">4</option>
+                                    <option value="5" th:selected="${articleInfo.order eq 5}">5</option>
+                                    <option value="6" th:selected="${articleInfo.order eq 6}">6</option>
+                                    <option value="7" th:selected="${articleInfo.order eq 7}">7</option>
+                                    <option value="8" th:selected="${articleInfo.order eq 8}">8</option>
+                                    <option value="9" th:selected="${articleInfo.order eq 9}">9</option>
+                                    <option value="10" th:selected="${articleInfo.order eq 10}">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">头图：</label>
+                            <div class="col-sm-8">
+                                <div class="file-loading">
+                                    <input id="uploadFile" type="file" name="headFile" multiple data-min-file-count="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">历史头图：</label>
+                            <div class="col-sm-6 col-md-8">
+                                <a href="#" class="thumbnail">
+                                    <img th:src="${articleInfo.headPic}" >
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" onclick="saveAricleInfo(this)" class="btn btn-info">&nbsp;保存&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </section>
+
+
+    <div class="modal fade" id="loadingModal" data-backdrop="static">
+        <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+            <div class="progress progress-striped active" style="margin-bottom: 0;">
+                <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+            <h5>正在上传图片中...</h5>
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>

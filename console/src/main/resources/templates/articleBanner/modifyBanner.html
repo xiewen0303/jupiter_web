@@ -1,0 +1,123 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>新增标签页</title>
+    <link rel="stylesheet"  th:href="@{/css/bootstrap/file/fileinput.css}"/>
+
+    <script th:src="@{/css/bootstrap/file/fileinput.js}" ></script>
+    <script th:src="@{/css/bootstrap/file/zh.js}" ></script>
+    <script th:src="@{/js/jQuery/jquery-form.js}" ></script>
+    <script th:src="@{/js/articleBanner/addBanner.js}" ></script>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform" >
+            <form class="form-horizontal form-search"  enctype="multipart/form-data" method="post"  action="/articleBanner/submitBanner"  role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">banner标题：</label>
+                            <div class="col-sm-4">
+                                <input  type="hidden" name="bannerId" th:value="${bannerEntity.id}" maxlength="5"/>
+                                <input type="hidden" name="location" th:value="${bannerEntity.location}"/>
+                                <input class="form-control" type="text" name="bannerName" th:value="${bannerEntity.bannerName}"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">图片：</label>
+                            <div class="col-sm-8">
+
+                                <div class="form-group">
+                                    <div class="file-loading">
+                                        <input id="uploadFile" type="file" name="bannerFile" multiple data-min-file-count="1">
+                                    </div>
+                                </div>
+                                <!--<input id="uploadFile" type="file" name="bannerFile" class="file" />-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <label class="col-sm-4 control-label">历史图片：</label>
+                        <div class="col-sm-6 col-md-3">
+                            <a href="#" class="thumbnail">
+                                <img th:src="${bannerEntity.src}" >
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">跳转URL：</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" name="href" th:value="${bannerEntity.href}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">优先级：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="seq" th:value="${bannerEntity.seq}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">点击banner跳转方式：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="target">
+                                    <option value="self" th:selected="${bannerEntity.target eq 'self'}">app内部打开</option>
+                                    <option value="blank" th:selected="${bannerEntity.target eq 'blank'}">浏览器打开</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" onclick="addBannerSubmit(this)" class="btn btn-info">&nbsp;提交&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+    <div class="modal fade" id="loadingModal" data-backdrop="static">
+        <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+            <div class="progress progress-striped active" style="margin-bottom: 0;">
+                <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+            <h5>正在上传图片中...</h5>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

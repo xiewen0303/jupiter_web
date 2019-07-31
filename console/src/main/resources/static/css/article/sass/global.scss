@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+@import "base/css3-mixins";
+
+.header {
+	height: rem(46);
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	> h1 {
+		width: 100%;
+		line-height: rem(46);
+		font-size: rem(16);
+		color: #333;
+		vertical-align: middle;
+		font-weight: 500;
+		display: block;
+		text-align: center;
+	}
+	i.iconfont {
+		position: absolute;
+		top: rem(14);
+		left: rem(10);
+	}
+	&::after {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: #d8d8d8;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+.footer {
+	height: rem(46);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	@include webkit-flex();
+	&::before {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: #d8d8d8;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+	>a {
+		line-height: rem(46);
+		font-size: rem(16);
+		display: block;
+		text-align: center;
+		@include flex-grow(1);
+	}
+}
+
+.header ~ .content {
+	top: rem(46);
+	background-color: #F6F5F5;
+}
+
+.footer ~ .content {
+	bottom: rem(46);
+}
+
+.content {
+	position: absolute;
+	top: 0;
+	overflow: auto;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-overflow-scrolling: touch;
+}
+
+
+
+

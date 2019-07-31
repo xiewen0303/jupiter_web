@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+</head>
+<body>
+<aside class="main-sidebar" th:fragment="sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li shiro:hasPermission="system">
+                <a href="#">
+                    <i class="oicon oicon-sysmanager"></i> <span>系统管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/admin/adminListPage"><a th:href="@{/admin/adminListPage}"><i class="oicon oicon-account"></i>管理员列表</a></li>
+                    <li shiro:hasPermission="/role/roleListPage"><a th:href="@{/role/roleListPage}"><i class="oicon oicon-rolesm"></i>角色列表</a></li>
+                    <li shiro:hasPermission="/permission/permissionListPage"><a th:href="@{/permission/permissionListPage}"><i class="oicon oicon-resourcem"></i>权限列表</a></li>
+                </ul>
+            </li>
+
+
+            <li shiro:hasPermission="label">
+                <a href="#">
+                    <i class="oicon oicon-account"></i> <span>标签</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/label/labels"><a th:href="@{/label/labels}"><i class="oicon oicon-caiwu"></i>标签管理</a></li>
+                    <li shiro:hasPermission="/label/addLabel"><a th:href="@{/label/addLabel}"><i class="oicon oicon-rolesm"></i>商品标签</a></li>
+                </ul>
+            </li>
+
+            <li shiro:hasPermission="category">
+                <a href="#">
+                    <i class="oicon oicon-account"></i> <span>类目管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/category/search"><a th:href="@{/category/search}"><i class="oicon oicon-caiwu"></i>类目列表管理</a></li>
+                    <li shiro:hasPermission="/category/addCategory"><a th:href="@{/category/addCategory}"><i class="oicon oicon-caiwu"></i>添加类目</a></li>
+                </ul>
+            </li>
+
+            <li shiro:hasPermission="articleCategory">
+                <a href="#">
+                    <i class="oicon oicon-account"></i> <span>文章分类管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/articleCategory/search"><a th:href="@{/articleCategory/search}"><i class="oicon oicon-caiwu"></i>文章分类列表</a></li>
+                    <li shiro:hasPermission="/articleCategory/addCategory"><a th:href="@{/articleCategory/addCategory}"><i class="oicon oicon-caiwu"></i>添加文章分类</a></li>
+                </ul>
+            </li>
+
+            <li shiro:hasPermission="banner">
+                <a href="#">
+                    <i class="oicon oicon-account"></i> <span>banner管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/banner/search"><a th:href="@{/banner/search}"><i class="oicon oicon-caiwu"></i>banner管理列表</a></li>
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/banner/addBanner"><a th:href="@{/banner/addBanner}"><i class="oicon oicon-caiwu"></i>添加banner</a></li>
+                </ul>
+            </li>
+
+            <li shiro:hasPermission="articleBanner">
+                <a href="#">
+                <i class="oicon oicon-account"></i> <span>社区banner管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/articleBanner/search"><a th:href="@{/articleBanner/search}"><i class="oicon oicon-caiwu"></i>社区banner管理列表</a></li>
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/articleBanner/addBanner"><a th:href="@{/articleBanner/addBanner}"><i class="oicon oicon-caiwu"></i>社区添加banner</a></li>
+                </ul>
+            </li>
+
+
+            <li shiro:hasPermission="articleInfo">
+                <a href="#">
+                    <i class="oicon oicon-account"></i> <span>文章管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/articleInfo/search"><a th:href="@{/articleInfo/search}"><i class="oicon oicon-caiwu"></i>审核管理</a></li>
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/articleInfo/searchOfficial"><a th:href="@{/articleInfo/searchOfficial}"><i class="oicon oicon-caiwu"></i>官方文章管理</a></li>
+                </ul>
+            </li>
+
+
+            <li shiro:hasPermission="log">
+                <a href="#">
+                    <i class="oicon oicon-rili"></i> <span>日志管理</span> <i class="oicon oicon-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li shiro:hasPermission="/log/search"><a th:href="@{/log/searchPage}"><i class="oicon oicon-lookup"></i>日志查询</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>
+</body>
+</html>

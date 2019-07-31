@@ -1,0 +1,82 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>新增标签页</title>
+    <link rel="stylesheet"  th:href="@{/plugins/jstree/themes/default/style.min.css}"/>
+
+    <script th:src="@{/plugins/jstree/jstree.min.js}" ></script>
+    <script th:src="@{/js/label/addLabel.js}" ></script>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform" >
+            <form class="form-horizontal form-search"  role="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">标签名字：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="name" maxlength="20"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">所属类目：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="categoryId" id="categoryName" maxlength="20" placeholder="请选择类目"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" onclick="selectCategory()" class="btn btn-primary">选择类目</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" onclick="addLabelSubmit(this)">&nbsp;提交&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+    <div class="modal fade"  id="categoryInfos"   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" >请选择类目：</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <div id="using_json" class="using_json"></div>
+                    </div>
+                </div>
+
+                <div class="box-footer text-right">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="selectBtn" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

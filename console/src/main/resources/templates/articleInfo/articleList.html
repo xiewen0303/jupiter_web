@@ -1,0 +1,147 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+<head>
+    <title>w文章列表</title>
+    <script th:src="@{/js/articleInfo/articleList.js}" ></script>
+</head>
+
+<body>
+
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform">
+            <form class="form-horizontal form-search" name="searchForm"  role="form">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文章标题：</label>
+                            <div class="col-sm-4">
+                                <input value="0" name="isOffer" type="hidden"/>
+                                <input class="form-control" type="text" name="title"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文章分类：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="categoryId" id="categoryId" style="width:100%;">
+                                    <option value="">请选择(全部)</option>
+                                    <option th:each="category:${categorys}"
+                                            th:value="${category.code}"
+                                            th:text="${category.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">创建时间：</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="datePickertab_1" placeholder="创建日期"/>
+                                <input type="hidden" class="form-control" name="beginTimeStr" id="beginTimeStr" placeholder="开始日期"/>
+                                <input type="hidden" class="form-control" name="endTimeStr" id="endTimeStr" placeholder="截至日期"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">状态：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="status">
+                                    <option value="">请选择(全部)</option>
+                                    <option value="1">未通过</option>
+                                    <option value="2">草稿</option>
+                                    <option value="3">审核</option>
+                                    <option value="4">已发布</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" onclick="searchList(this)">&nbsp;查询&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <!--<div class="box-header">-->
+                        <!--<button type="button" shiro:hasPermission="/role/initAddRole" onclick="addInfo(this)" class="btn btn-primary"><i class="ion-ios-plus-empty"></i>添加</button>-->
+                    <!--</div>-->
+                    <div class="box-body no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>文章分类</th>
+                                <th>文章标题</th>
+                                <th>文章提审时间</th>
+                                <th>用户手机号</th>
+                                <th>昵称</th>
+                                <th>文章状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td>{{tab.categoryName}}</td>
+                                    <td title="{{tab.title}}" >
+                                        {{ if tab.title.length > 50 }}
+                                                {{tab.title.substring(0,50)}}...
+                                        {{ else}}
+                                                {{tab.title}}
+                                        {{/if}}
+                                    </td>
+                                    <td>{{tab.createTimeFormate}}</td>
+                                    <td>{{tab.mobile}}</td>
+                                    <td>{{tab.nickname}}</td>
+                                    <td>
+                                        {{if tab.status == 1}}
+                                            未通过
+                                        {{else if tab.status == 2}}
+                                            草稿
+                                        {{else if tab.status == 3}}
+                                            审核中
+                                        {{else if tab.status == 4}}
+                                            已发布
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        <div class="col-sm-2">
+                                                <button type="button" onclick="infoArticle('{{tab.id}}')" class="btn btn-primary">审核</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p id="roleListPagination"  class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+</body>
+</html>

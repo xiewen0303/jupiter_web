@@ -1,0 +1,111 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+<head>
+    <title>类目列表</title>
+    <link rel="stylesheet"  th:href="@{/plugins/jstree/themes/default/style.min.css}"/>
+
+    <script th:src="@{/plugins/jstree/jstree.min.js}" ></script>
+    <script th:src="@{/js/label/labelList.js}" ></script>
+
+</head>
+
+<body>
+
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <div id="searchform">
+            <form class="form-horizontal form-search"  role="form">
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">类目名称：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="categoryName" id="categoryName" maxlength="20" placeholder="请选择类目"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" onclick="selectCategory()" class="btn btn-primary">选择类目</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" onclick="searchList(this)">&nbsp;查询&nbsp;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-header">
+                        <button type="button" shiro:hasPermission="/role/initAddRole" onclick="addLabelInfo()" class="btn btn-primary"><i class="ion-ios-plus-empty"></i>添加</button>
+                    </div>
+                    <div class="box-body no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>类目</th>
+                                <th>标签名字</th>
+                                <th>标签状态</th>
+                                <th>最后更新时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td>{{tab.id}}</td>
+                                    <td>{{tab.categoryName}}</td>
+                                    <td>{{tab.name}}</td>
+                                    <td>{{tab.stauts}}</td>
+                                    <td>{{tab.lastModifyTimeFormate}}</td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p id="roleListPagination"  class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade"  id="categoryInfos"   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" >请选择类目：</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="ibox-content">
+                            <div id="using_json" class="using_json"></div>
+                        </div>
+                    </div>
+
+                <div class="box-footer text-right">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="selectBtn" type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

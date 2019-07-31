@@ -1,0 +1,108 @@
+<html layout:decorator="layout/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<!--  根据管理员  根据log类型 时间 -->
+<head>
+    <title>日志列表</title>
+    <script th:src="@{/js/log/logList.js}"></script>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <section class="content">
+        <form class="form-horizontal form-search">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">管理员名称: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="adminName" id="adminName"
+                                   placeholder="管理员名称"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">日志类型：</label>
+                        <div class="col-sm-8 ">
+                            <select class="form-control" name="logType" id="logType" style="width:100%;">
+                                <option value="">请选择(全部)</option>
+                                <option th:each="logType:${logTypes}"
+                                        th:value="${logType.type}"
+                                        th:text="${logType.detail}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">日志时间：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="datePickertab_1" placeholder="创建日期"/>
+                            <input type="hidden" class="form-control" name="logStart" id="logStart" placeholder="开始日期"/>
+                            <input type="hidden" class="form-control" name="logEnd" id="logEnd" placeholder="截至日期"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-info" name="btnSearch01" onclick="searchList(this)">
+                                &nbsp;查询&nbsp;
+                            </button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-round">
+                    <div class="box-body no-padding">
+                        <table class="table table-bordered table-hover"
+                               style="table-layout:fixed;word-break:break-all;word-wrap:break-word;">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>操作管理员</th>
+                                <th>操作类型</th>
+                                <th>操作地址</th>
+                                <th>日志详情</th>
+                                <th>日志时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <script type="text/html">
+                                {{each list tab index}}
+                                <tr>
+                                    <td>
+                                        {{pageSize*(page-1) + index + 1}}
+                                    </td>
+                                    <td>{{tab.adminName}}</td>
+                                    <td>{{tab.logTypeInfo}}</td>
+                                    <td>{{tab.logUri}}</td>
+                                    <td>{{tab.logInfo}}</td>
+                                    <td>{{tab.logShowTime}}</td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <p id="adminListPagination" class="box-footer dataTables_paginate"></p>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+</body>
+</html>

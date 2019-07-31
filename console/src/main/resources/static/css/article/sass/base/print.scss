@@ -1,0 +1,181 @@
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+
+@charset "utf-8";
+
+$vw_fontsize: 75;
+@function rem($px) {
+    @return (($px / 2) / $vw_fontsize) * 1rem;
+}
+
+$vw_design: 750;
+html {
+    font-size: ($vw_fontsize / ($vw_design / 2)) * 100vw;
+    @media screen and (max-width: 320px) {
+        font-size: 64px;
+    }
+    @media screen and (min-width: 540px) {
+        font-size: 108px;
+    }
+}
+
+body {
+    min-width: 320px;
+    max-width: 540px;
+}
+
+/* RESET */
+
+html,
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+fieldset,
+input,
+abbr,
+article,
+aside,
+command,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+mark,
+meter,
+nav,
+output,
+progress,
+section,
+summary,
+time {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0 none;
+    vertical-align: top;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 0.4rem;
+}
+
+body,
+input,
+select,
+button,
+textarea,
+option {
+    font-family: -apple-system, Helvetica, sans-serif;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+i,
+em,
+cite {
+    font-style: normal;
+}
+
+body {
+    background-color: #fff;
+    color: #363636;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0 auto;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+    &:link {
+        @extend a;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    -webkit-appearance: none;
+}
+
+textarea {
+    -webkit-appearance: none;
+}
+
+::-webkit-input-placeholder {
+    color: #BFBFBF;
+}
+
+:-moz-placeholder {
+    color: #BFBFBF;
+}
+
+::-moz-placeholder {
+    color: #BFBFBF;
+}
+
+:-ms-input-placeholder {
+    color: #BFBFBF;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}

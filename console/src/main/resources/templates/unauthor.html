@@ -1,0 +1,26 @@
+<html layout:decorator="layout/layout"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>首页</title>
+</head>
+<body>
+<div class="content-wrapper" style="position: relative;" layout:fragment="content">
+    <section class="content">
+    <div class="error-page">
+        <h2 class="headline text-yellow"> 403</h2>
+
+        <div class="error-content">
+            <h3>&nbsp;</h3>
+            <h4><i class="oicon oicon-forbidden text-yellow"></i> 页面未授权</h4>
+            <p>
+                抱歉！没有权限访问当前页面，<a href="/">点击回到首页</a>，
+            </p>
+            <p>获取更多其他内容</p>
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+</div>
+</body>
+</html>
