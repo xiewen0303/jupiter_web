@@ -32,7 +32,7 @@
         <jfreechart.version>1.0.0</jfreechart.version>
         <fastjson.version>1.2.29</fastjson.version>
         <asm-all.version>3.3.1</asm-all.version>
-        <quartz.version>2.2.1</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <cxf.version>3.0.2</cxf.version>
         <lombok.version>1.12.6</lombok.version>
         <commons-lang3.version>3.1</commons-lang3.version>
